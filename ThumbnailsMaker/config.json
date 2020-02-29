@@ -1,0 +1,126 @@
+{
+	"$schema": "./config-schema.json",
+
+	"output": {
+		"directory": "./output",
+		"imageFormat": "png",
+		"jpegQuality": 75
+	},
+
+	"fitToBackgroundImageSize": false,
+	"imageWidth": 1280,
+	"imageHeight": 720,
+
+	"background": {
+		"imagePath": "./images/bg_ghost_mask.png",
+		"text": {
+			"enabled": true,
+			"message": "This is a test message for Thumbnail Maker",
+			"textAlignment": "center",
+			"antialias": true,
+			"wrapTextWidth": 900,
+			"font": {
+				"path": "./fonts/BebasNeue-Regular.ttf",
+				"size": 130,
+				"positionCorrection": 0,
+				"color": [ 255, 255, 255]
+			},
+			"position": {
+				"x": 200,
+				"y": 200
+			},
+			"shadow": {
+				"enabled": true,
+				"shiftRight": 3,
+				"shiftDown": 3,
+				"color": [ 147, 112, 219 ],
+				"sizeShift": 0
+			}
+		},
+		"filters": {
+			"sepia": {
+				"enabled": true,
+				"order": 1,
+				"amount": 1				
+			},
+			"blackWhite": {
+				"enabled": false,
+				"order": 1
+			},
+			"invert": {
+				"enabled": false,
+				"order": 1
+			},
+			"polaroid": {
+				"enabled": false,
+				"order": 1
+			},
+			"grayscale": {
+				"enabled": false,
+				"order": 1,
+				"amount": 1
+			},
+			"contrast": {
+				"enabled": false,
+				"order": 1,
+				"amount": 8
+			},
+			"lomograph": {
+				"enabled": false,
+				"order": 1
+			},
+			"saturate": {
+				"enabled": false,
+				"order": 1,
+				"amount": 15
+			},
+			"gaussianBlur": {
+				"enabled": true,
+				"order": 1,
+				"amount": 4
+			},
+			"pixelate": {
+				"enabled": false,
+				"order": 1,
+				"size": 4
+			}
+		}
+	},
+
+	"bars": [
+		{
+			"enabled": true,
+			"height": 80,
+			"position": "top",
+			"text": ".Net Core",
+			"textAlignment": "center",
+			"font": {
+				"path": "./fonts/BebasNeue-Regular.ttf",
+				"size": 60,
+				"positionCorrection": 8,
+				"color": [ 255, 0, 255, 255 ]
+			},
+			"antialias": true,
+			"backgroundColor": [ 176, 36, 255, 155 ]
+		},
+		{
+			"enabled": true,
+			"height": 100,
+			"position": "bottom",
+			"text": "I like it",
+			"printCurrentDateTime": true,
+			"dateTimeFormat": "yyyy MMMM dd",
+			"textAlignment": "center",
+			"textPaddingLeftRight": 10,
+			"font": {
+				"path": "./fonts/BebasNeue-Regular.ttf",
+				"size": 60,
+				"positionCorrection": 8,
+				"color": [ 255, 60, 250, 30 ]
+			},
+			"antialias": true,
+			"backgroundColor": [ 160, 160, 160, 35 ]
+		}
+	]
+
+}

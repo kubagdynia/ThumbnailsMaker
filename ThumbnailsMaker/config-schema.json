@@ -1,0 +1,337 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+
+	"definitions": {
+		"color": {
+			"type": "array",
+			"minItems": 3,
+			"maxItems": 4,
+			"items": {
+				"type": "integer",
+				"minimum": 0,
+				"maximum": 255
+			},
+			"default": [ 255, 255, 255, 255 ],
+			"description": "RGBA Color"
+		},
+		"order": {
+			"type": "integer",
+			"default": 1,
+			"description": "Order of operations. A Smaller number has higher priority."
+		},
+		"enabled": {
+			"type": "boolean",
+			"default": false,
+			"description": "Whether the operation or component is enabled."
+		},
+		"font": {
+			"type": "object",
+			"properties": {
+				"path": {
+					"type": "string",
+					"default": "./BebasNeue-Regular.ttf"
+				},
+				"size": {
+					"type": "number",
+					"minimum": 1,
+					"default": 60
+				},
+				"positionCorrection": {
+					"type": "integer",
+					"minimum": 0,
+					"default": 0
+				},
+				"color": { "$ref": "#/definitions/color" }
+			},
+			"additionalProperties": false,
+			"required": [ "path" ]
+		},
+		"textAlignment": {
+			"enum": [ "left", "right", "center" ],
+			"type": "string",
+			"default": "center"
+		},
+		"antialias": {
+			"type": "boolean",
+			"default": true,
+			"description": "Antialiasing"
+		},
+		"position": {
+			"type": "object",
+			"properties": {
+				"x": {
+					"type": "integer",
+					"minimum": 0
+				},
+				"y": {
+					"type": "integer",
+					"minimum": 0
+				}
+			},
+			"additionalProperties": false
+		},
+		"shadow": {
+			"type": "object",
+			"properties": {
+				"enabled": { "$ref": "#/definitions/enabled" },
+				"shiftRight": {
+					"type": "integer",
+					"default": 0
+				},
+				"shiftDown": {
+					"type": "integer",
+					"default": 0
+				},
+				"sizeShift": {
+					"type": "integer",
+					"default": 0
+				},
+				"color": { "$ref": "#/definitions/color" }
+			},
+			"additionalProperties": false
+		}
+	},
+
+	"type": "object",
+
+	"properties": {
+		"output": {
+			"type": "object",
+			"properties": {
+				"directory": {
+					"type": "string",
+					"minLength": 1,
+					"description": "Output image directory",
+					"default": "./output"
+				},
+				"imageFormat": {
+					"enum": [ "jpeg", "png", "gif" ],
+					"type": "string"
+				},
+				"jpegQuality": {
+					"type": "integer",
+					"minimum": 0,
+					"maximum": 100
+				}
+			}
+		},
+		"fitToBackgroundImageSize": {
+			"type": "boolean",
+			"default": false
+		},
+		"imageWidth": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"imageHeight": {
+			"type": "integer",
+			"minimum": 1
+		},
+		"background": {
+			"type": "object",
+			"properties": {
+				"imagePath": {
+					"type": "string"
+				},
+				"text": {
+					"type": "object",
+					"properties": {
+						"enabled": { "$ref": "#/definitions/enabled" },
+						"message": {
+							"type": "string"
+						},
+						"textAlignment": { "$ref":  "#/definitions/textAlignment" },
+						"antialias": { "$ref": "#/definitions/antialias" },
+						"wrapTextWidth": {
+							"type": "number",
+							"default": 900,
+							"description": "If greater than zero determine the width at which text should wrap."
+						},
+						"font": { "$ref": "#/definitions/font" },
+						"shadowFont": { "$ref": "#/definitions/font" },
+						"position": { "$ref": "#/definitions/position"},
+						"shadow": { "$ref": "#/definitions/shadow" }
+					},
+					"additionalProperties": false,
+					"required": ["position"]
+				},
+				"filters": {
+					"type": "object",
+					"properties": {
+						"sepia": {
+							"type": "object",
+							"description": "Applies sepia toning to the image using the given amount.",
+							"properties": {
+								"enabled": { "$ref": "#/definitions/enabled" },
+								"order": { "$ref": "#/definitions/order" },
+								"amount": {
+									"type": "number",
+									"minimum": 0,
+									"maximum": 1,
+									"default": 1,
+									"description": "The proportion of the conversion."
+								}
+							},
+							"additionalProperties": false
+						},
+						"blackWhite": {
+							"type": "object",
+							"description": "Applies black and white toning to the image.",
+							"properties": {
+								"enabled": { "$ref": "#/definitions/enabled" },
+								"order": { "$ref": "#/definitions/order" }
+							},
+							"additionalProperties": false
+						},
+						"invert": {
+							"type": "object",
+							"description": "Inverts the colors of the image.",
+							"properties": {
+								"enabled": { "$ref": "#/definitions/enabled" },
+								"order": { "$ref": "#/definitions/order" }
+							},
+							"additionalProperties": false
+						},
+						"polaroid": {
+							"type": "object",
+							"description": "Alters the colors of the image recreating an old Polaroid camera effect.",
+							"properties": {
+								"enabled": { "$ref": "#/definitions/enabled" },
+								"order": { "$ref": "#/definitions/order" }
+							},
+							"additionalProperties": false
+						},
+						"grayscale": {
+							"type": "object",
+							"description": "Applies grayscale toning to the image using the given amount",
+							"properties": {
+								"enabled": { "$ref": "#/definitions/enabled" },
+								"order": { "$ref": "#/definitions/order" },
+								"amount": {
+									"type": "number",
+									"minimum": 0,
+									"maximum": 1,
+									"default": 1,
+									"description": "The proportion of the conversion."
+								},
+								"additionalProperties": false
+							}
+						},
+						"contrast": {
+							"type": "object",
+							"description": "Alters the contrast component of the image. A value of 0 will create an image that is completely gray. A value of 1 leaves the input unchanged. Other values are linear multipliers on the effect. Values of an amount over 1 are allowed, providing results with more contrast.",
+							"properties": {
+								"enabled": { "$ref": "#/definitions/enabled" },
+								"order": { "$ref": "#/definitions/order" },
+								"amount": {
+									"type": "number",
+									"minimum": 0,
+									"default": 1,
+									"description": "The proportion of the conversion."
+								},
+								"additionalProperties": false
+							}
+						},
+						"lomograph": {
+							"type": "object",
+							"description": "Alters the colors of the image recreating an old Lomograph camera effect.",
+							"properties": {
+								"enabled": { "$ref": "#/definitions/enabled" },
+								"order": { "$ref": "#/definitions/order" }
+							},
+							"additionalProperties": false
+						},
+						"saturate": {
+							"type": "object",
+							"description": "Alters the saturation component of the image. A value of 0 is completely un-saturated. A value of 1 leaves the input unchanged. Other values are linear multipliers on the effect. Values of amount over 1 are allowed, providing super-saturated results.",
+							"properties": {
+								"enabled": { "$ref": "#/definitions/enabled" },
+								"order": { "$ref": "#/definitions/order" },
+								"amount": {
+									"type": "number",
+									"minimum": 0,
+									"default": 1,
+									"description": "The proportion of the conversion."
+								}
+							},
+							"additionalProperties": false
+						},
+						"gaussianBlur": {
+							"type": "object",
+							"description": "Applies a Gaussian blur to the image.",
+							"properties": {
+								"enabled": { "$ref": "#/definitions/enabled" },
+								"order": { "$ref": "#/definitions/order" },
+								"amount": {
+									"type": "number",
+									"minimum": 0,
+									"default": 3,
+									"description": "The value representing the weight of the blur."
+								}
+							},
+							"additionalProperties": false
+						},
+						"pixelate": {
+							"type": "object",
+							"description": "Pixelates an image with the given pixel size.",
+							"properties": {
+								"enabled": { "$ref": "#/definitions/enabled" },
+								"order": { "$ref": "#/definitions/order" },
+								"size": {
+									"type": "integer",
+									"exclusiveMinimum": 0,
+									"default": 4,
+									"description": "The size of the pixels."
+								}
+							},
+							"additionalProperties": false
+						}
+
+					},
+					"additionalProperties": false
+				}
+			}
+		},
+		"bars": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"enabled": { "$ref": "#/definitions/enabled" },
+					"height": {
+						"type": "integer",
+						"minimum": 1,
+						"default": 80
+					},
+					"position": {
+						"enum": [ "left", "right", "top", "bottom" ],
+						"type": "string",
+						"default": "top"
+					},
+					"text": {
+						"type": "string",
+						"default": "Hello!"
+					},
+					"printCurrentDateTime": {
+						"type": "boolean",
+						"default": false
+					},
+					"dateTimeFormat": {
+						"type": "string",
+						"default": "yyyy MMMM dd"
+					},
+					"textAlignment": { "$ref": "#/definitions/textAlignment" },
+					"textPaddingLeftRight": {
+						"type": "integer",
+						"minimum": 0,
+						"default": 0
+					},
+					"antialias": { "$ref": "#/definitions/antialias" },
+					"backgroundColor": { "$ref": "#/definitions/color" },
+					"font": { "$ref": "#/definitions/font" }
+				},
+				"additionalProperties": false
+			}
+		}
+	}
+}

@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="5.1.2" />
+    <PackageReference Include="CommandLineParser" Version="2.7.82" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0007" />
+    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta0007" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Images/bg_ghost_mask.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Fonts/BebasNeue-Regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="config.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="config-schema.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <FontFiles Include="../Fonts/*.*">
+      <InProject>false</InProject>
+    </FontFiles>
+    <ImageFiles Include="../Images/*.*">
+      <InProject>false</InProject>
+    </ImageFiles>
+  </ItemGroup>
+
+  <!-- Copying resources files -->
+  <Target Name="CopyFiles" AfterTargets="AfterBuild">
+    <Copy SourceFiles="@(FontFiles)" DestinationFolder="$(OutDir)/fonts" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(ImageFiles)" DestinationFolder="$(OutDir)/images" SkipUnchangedFiles="true" />
+  </Target>
+
+
+
+
+</Project>
