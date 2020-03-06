@@ -1,6 +1,6 @@
 namespace ThumbnailsMaker
 {
-    public enum TextAlignment
+    public enum TextHorizontalAlignment
     {
         Left,
         Right,

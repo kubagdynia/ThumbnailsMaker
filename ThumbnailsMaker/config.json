@@ -1,47 +1,103 @@
 {
 	"$schema": "./config-schema.json",
-
 	"output": {
 		"directory": "./output",
 		"imageFormat": "png",
 		"jpegQuality": 75
 	},
-
 	"fitToBackgroundImageSize": false,
-	"imageWidth": 1280,
-	"imageHeight": 720,
-
+	"imageWidth": 1200,
+	"imageHeight": 675,
 	"background": {
-		"imagePath": "./images/bg_ghost_mask.png",
-		"text": {
-			"enabled": true,
-			"message": "This is a test message for Thumbnail Maker",
-			"textAlignment": "center",
-			"antialias": true,
-			"wrapTextWidth": 900,
-			"font": {
-				"path": "./fonts/BebasNeue-Regular.ttf",
-				"size": 130,
-				"positionCorrection": 0,
-				"color": [ 255, 255, 255]
-			},
-			"position": {
-				"x": 200,
-				"y": 200
-			},
-			"shadow": {
+		"imagePath": "./images/autofac.png",
+		"texts": [
+			{
 				"enabled": true,
-				"shiftRight": 3,
-				"shiftDown": 3,
-				"color": [ 147, 112, 219 ],
-				"sizeShift": 0
+				"message": "AUTOFAC",
+				"horizontalAlignment": "center",
+				"antialias": true,
+				"wrapTextWidth": 900,
+				"font": {
+					"path": "./fonts/BebasNeue-Regular.ttf",
+					"size": 130,
+					"positionCorrection": 0,
+					"color": [
+						255,
+						255,
+						255
+					]
+				},
+				"position": {
+					"x": 200,
+					"y": 200
+				},
+				"shadow": {
+					"enabled": true,
+					"shiftRight": 3,
+					"shiftDown": 3,
+					"color": [
+						147,
+						112,
+						219
+					],
+					"sizeShift": 0
+				}
+			},
+			{
+				"enabled": false,
+				"message": "second message",
+				"horizontalAlignment": "center",
+				"antialias": true,
+				"wrapTextWidth": 100,
+				"font": {
+					"path": "./fonts/BebasNeue-Regular.ttf",
+					"size": 30,
+					"positionCorrection": 0,
+					"color": [
+						255,
+						255,
+						255
+					]
+				},
+				"position": {
+					"x": 10,
+					"y": 10
+				},
+				"shadow": {
+					"enabled": true,
+					"shiftRight": 3,
+					"shiftDown": 3,
+					"color": [
+						147,
+						112,
+						219
+					],
+					"sizeShift": 0
+				}
 			}
-		},
+		],
+		"lines": [
+			{
+				"enabled": true,
+				"width": 400,
+				"height": 10,
+				"color": [
+					255,
+					255,
+					255,
+					100
+				],
+				"position": {
+					"x": 200,
+					"y": 200
+				}
+			}
+		],
 		"filters": {
 			"sepia": {
-				"enabled": true,
+				"enabled": false,
 				"order": 1,
-				"amount": 1				
+				"amount": 1
 			},
 			"blackWhite": {
 				"enabled": false,
@@ -56,7 +112,7 @@
 				"order": 1
 			},
 			"grayscale": {
-				"enabled": false,
+				"enabled": true,
 				"order": 1,
 				"amount": 1
 			},
@@ -75,7 +131,7 @@
 				"amount": 15
 			},
 			"gaussianBlur": {
-				"enabled": true,
+				"enabled": false,
 				"order": 1,
 				"amount": 4
 			},
@@ -83,28 +139,42 @@
 				"enabled": false,
 				"order": 1,
 				"size": 4
+			},
+			"brightness": {
+				"enabled": false,
+				"order": 1,
+				"amount": 2
 			}
 		}
 	},
-
 	"bars": [
 		{
 			"enabled": true,
 			"height": 80,
-			"position": "top",
+			"position": "left",
 			"text": ".Net Core",
 			"textAlignment": "center",
 			"font": {
 				"path": "./fonts/BebasNeue-Regular.ttf",
 				"size": 60,
 				"positionCorrection": 8,
-				"color": [ 255, 0, 255, 255 ]
+				"color": [
+					255,
+					0,
+					255,
+					255
+				]
 			},
 			"antialias": true,
-			"backgroundColor": [ 176, 36, 255, 155 ]
+			"backgroundColor": [
+				176,
+				36,
+				255,
+				155
+			]
 		},
 		{
-			"enabled": true,
+			"enabled": false,
 			"height": 100,
 			"position": "bottom",
 			"text": "I like it",
@@ -116,11 +186,20 @@
 				"path": "./fonts/BebasNeue-Regular.ttf",
 				"size": 60,
 				"positionCorrection": 8,
-				"color": [ 255, 60, 250, 30 ]
+				"color": [
+					255,
+					60,
+					250,
+					30
+				]
 			},
 			"antialias": true,
-			"backgroundColor": [ 160, 160, 160, 35 ]
+			"backgroundColor": [
+				160,
+				160,
+				160,
+				35
+			]
 		}
 	]
-
 }

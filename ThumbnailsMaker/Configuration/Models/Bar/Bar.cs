@@ -25,7 +25,7 @@ namespace ThumbnailsMaker
 
         [JsonPropertyName("textAlignment")]
         [JsonConverter(typeof(JsonStringEnumConverter))]
-        public TextAlignment TextAlignment { get; set; } = TextAlignment.Center;
+        public TextHorizontalAlignment TextHorizontalAlignment { get; set; } = TextHorizontalAlignment.Center;
         
         [JsonPropertyName("textPaddingLeftRight")]
         public int TextPaddingLeftRight { get; set; } = 0;

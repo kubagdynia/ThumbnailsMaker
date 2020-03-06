@@ -45,11 +45,11 @@ namespace ThumbnailsMaker.Components
             
             using var txtImage = new Image<Rgba32>(Configuration.Default, txtImageWidth, bar.Height, bar.BackgroundColor.ToColor());
             
-            var txtLocation = bar.TextAlignment switch
+            var txtLocation = bar.TextHorizontalAlignment switch
             {
-                TextAlignment.Left => new Point(0 + bar.TextPaddingLeftRight, GetTextYLocation()),
-                TextAlignment.Right => new Point(txtImageWidth - (int) size.Width - bar.TextPaddingLeftRight, GetTextYLocation()),
-                TextAlignment.Center => new Point(txtImageWidth / 2 - (int) size.Width / 2, GetTextYLocation()),
+                TextHorizontalAlignment.Left => new Point(0 + bar.TextPaddingLeftRight, GetTextYLocation()),
+                TextHorizontalAlignment.Right => new Point(txtImageWidth - (int) size.Width - bar.TextPaddingLeftRight, GetTextYLocation()),
+                TextHorizontalAlignment.Center => new Point(txtImageWidth / 2 - (int) size.Width / 2, GetTextYLocation()),
                 _ => throw new ArgumentException()
             };
 

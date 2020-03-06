@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace ThumbnailsMaker
@@ -7,8 +8,11 @@ namespace ThumbnailsMaker
         [JsonPropertyName("imagePath")]
         public string ImagePath { get; set; }
         
-        [JsonPropertyName("text")]
-        public Text Text { get; set; } = new Text();
+        [JsonPropertyName("texts")]
+        public List<Text> Texts { get; set; } = new List<Text>();
+        
+        [JsonPropertyName("lines")]
+        public List<Line> Lines { get; set; } = new List<Line>();
 
         [JsonPropertyName("filters")]
         public ImageFilters Filters { get; set; } = new ImageFilters();

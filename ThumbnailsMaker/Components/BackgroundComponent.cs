@@ -20,17 +20,32 @@ namespace ThumbnailsMaker.Components
         
         public void DrawBackground(Image image)
         {
-            FontFamily fontFamily = new FontCollection().Install(_config.Background.Text.TextFont.Path);
-
             _backgroundFilters.ApplyFilters(image);
-            
             CalculateImageSize(image);
-
-            TextGraphicsOptions textGraphicsOptions = CreateTextGraphicsOptions();
-
-            AddShadow(image, textGraphicsOptions, fontFamily);
             
-            AddText(image, textGraphicsOptions, fontFamily);
+            foreach (Text text in _config.Background.Texts)
+            {
+                FontFamily fontFamily = new FontCollection().Install(text.TextFont.Path);
+                
+                TextGraphicsOptions textGraphicsOptions = CreateTextGraphicsOptions(text);
+                
+                AddShadow(image, text, textGraphicsOptions, fontFamily);
+                
+                AddText(image, text, textGraphicsOptions, fontFamily);
+            }
+
+            foreach (Line line in _config.Background.Lines)
+            {
+                AddLine(image, line);
+            }
+        }
+
+        private void AddLine(Image image, Line line)
+        {
+            if (!line.Enabled) return;
+            
+            var rectange = new Rectangle(line.Position.X, line.Position.Y, line.Width, line.Height);
+            image.Mutate(i => i.Fill(line.Color.ToColor(), rectange));
         }
 
         private void CalculateImageSize(Image image)
@@ -46,51 +61,51 @@ namespace ThumbnailsMaker.Components
             }
         }
 
-        private void AddText(Image image, TextGraphicsOptions textGraphicsOptions, FontFamily fontFamily)
+        private void AddText(Image image, Text text, TextGraphicsOptions textGraphicsOptions, FontFamily fontFamily)
         {
-            if (!_config.Background.Text.Enabled) return;
+            if (!text.Enabled) return;
             
-            var font = new Font(fontFamily, _config.Background.Text.TextFont.Size);
+            var font = new Font(fontFamily, text.TextFont.Size);
             
             image.Mutate(x => x.DrawText
                 (
                     textGraphicsOptions,
-                    _config.Background.Text.Message,
+                    text.Message,
                     font,
-                    _config.Background.Text.TextFont.Color.ToColor(),
-                    new Point(_config.Background.Text.Position.X, _config.Background.Text.Position.Y)
+                    text.TextFont.Color.ToColor(),
+                    new Point(text.Position.X, text.Position.Y)
                 )
             );
         }
 
-        private void AddShadow(Image image, TextGraphicsOptions textGraphicsOptions, FontFamily fontFamily)
+        private void AddShadow(Image image, Text text, TextGraphicsOptions textGraphicsOptions, FontFamily fontFamily)
         {
-            if (!_config.Background.Text.Enabled || !_config.Background.Text.TextShadow.Enabled) return;
+            if (!text.Enabled || !text.TextShadow.Enabled) return;
 
             var font = new Font(fontFamily,
-                _config.Background.Text.TextFont.Size + _config.Background.Text.TextShadow.SizeShift);
+                text.TextFont.Size + text.TextShadow.SizeShift);
 
             image.Mutate(x =>
             {
                 x.DrawText(
                     textGraphicsOptions,
-                    _config.Background.Text.Message,
+                    text.Message,
                     font,
-                    _config.Background.Text.TextShadow.Color.ToColor(),
+                    text.TextShadow.Color.ToColor(),
                     GetLocation());
             });
 
             Point GetLocation()
-                => new Point(_config.Background.Text.Position.X + _config.Background.Text.TextShadow.ShiftRight,
-                    _config.Background.Text.Position.Y + _config.Background.Text.TextShadow.ShiftDown);
+                => new Point(text.Position.X + text.TextShadow.ShiftRight,
+                    text.Position.Y + text.TextShadow.ShiftDown);
         }
         
-        private TextGraphicsOptions CreateTextGraphicsOptions()
+        private TextGraphicsOptions CreateTextGraphicsOptions(Text text)
             => new TextGraphicsOptions
             {
-                Antialias = _config.Background.Text.Antialias,
-                WrapTextWidth = _config.Background.Text.WrapTextWidth,
-                HorizontalAlignment = _config.Background.Text.TextAlignment.ToHorizontalAlignment()
+                Antialias = text.Antialias,
+                WrapTextWidth = text.WrapTextWidth,
+                HorizontalAlignment = text.TextHorizontalAlignment.ToHorizontalAlignment()
             };
     }
 }

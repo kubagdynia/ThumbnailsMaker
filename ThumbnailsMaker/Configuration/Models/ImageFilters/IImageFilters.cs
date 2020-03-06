@@ -13,5 +13,6 @@ namespace ThumbnailsMaker
         ImageFilterPropertySaturate PropertySaturate { get; set; }
         ImageFilterPropertyGaussianBlur PropertyGaussianBlur { get; set; }
         ImageFilterPropertyPixelate PropertyPixelate { get; set; }
+        ImageFilterPropertyBrightness PropertyBrightness { get; set; }
     }
 }

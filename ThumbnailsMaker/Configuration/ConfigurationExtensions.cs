@@ -26,12 +26,12 @@ namespace ThumbnailsMaker
         public static string ToFileExtension(this ImageFormat imageFormat)
             => imageFormat.ToString().ToLower();
 
-        public static HorizontalAlignment ToHorizontalAlignment(this TextAlignment textAlignment)
-            => textAlignment switch
+        public static HorizontalAlignment ToHorizontalAlignment(this TextHorizontalAlignment textHorizontalAlignment)
+            => textHorizontalAlignment switch
             {
-                TextAlignment.Center => HorizontalAlignment.Center,
-                TextAlignment.Left => HorizontalAlignment.Left,
-                TextAlignment.Right => HorizontalAlignment.Right,
+                TextHorizontalAlignment.Center => HorizontalAlignment.Center,
+                TextHorizontalAlignment.Left => HorizontalAlignment.Left,
+                TextHorizontalAlignment.Right => HorizontalAlignment.Right,
                 _ => HorizontalAlignment.Center
             };
     }

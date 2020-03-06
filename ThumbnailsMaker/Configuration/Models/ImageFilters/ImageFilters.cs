@@ -36,6 +36,8 @@ namespace ThumbnailsMaker
         
         [JsonPropertyName("pixelate")]
         public ImageFilterPropertyPixelate PropertyPixelate { get; set; } = new ImageFilterPropertyPixelate();
-        
+
+        [JsonPropertyName("brightness")]
+        public ImageFilterPropertyBrightness PropertyBrightness { get; set; } = new ImageFilterPropertyBrightness();
     }
 }

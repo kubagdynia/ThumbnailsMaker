@@ -14,9 +14,9 @@ namespace ThumbnailsMaker
         [JsonPropertyName("antialias")]
         public bool Antialias { get; set; } = true;
         
-        [JsonPropertyName("textAlignment")]
+        [JsonPropertyName("horizontalAlignment")]
         [JsonConverter(typeof(JsonStringEnumConverter))]
-        public TextAlignment TextAlignment { get; set; } = TextAlignment.Center;
+        public TextHorizontalAlignment TextHorizontalAlignment { get; set; } = TextHorizontalAlignment.Center;
 
         [JsonPropertyName("wrapTextWidth")]
         public float WrapTextWidth { get; set; } = 900f;

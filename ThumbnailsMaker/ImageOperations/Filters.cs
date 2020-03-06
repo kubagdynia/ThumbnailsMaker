@@ -59,6 +59,10 @@ namespace ThumbnailsMaker.ImageOperations
                 {
                     imageFilters.PropertyPixelate, (filter, image) => 
                         image.Mutate(x => x.Pixelate(filter.Size))
+                },
+                {
+                    imageFilters.PropertyBrightness, (filter, image) => 
+                        image.Mutate(x => x.Brightness(filter.Amount))
                 }
             };
         }
