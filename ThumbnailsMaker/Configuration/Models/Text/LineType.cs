@@ -3,10 +3,9 @@ using System.Text.Json.Serialization;
 namespace ThumbnailsMaker
 {
     [JsonConverter(typeof(JsonStringEnumConverter))]
-    public enum ImageFormat
+    public enum LineType
     {
-        Png,
-        Jpeg,
-        Gif
+        Single,
+        Double
     }
 }

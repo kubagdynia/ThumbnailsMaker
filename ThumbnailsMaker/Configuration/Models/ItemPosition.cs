@@ -3,10 +3,11 @@ using System.Text.Json.Serialization;
 namespace ThumbnailsMaker
 {
     [JsonConverter(typeof(JsonStringEnumConverter))]
-    public enum ImageFormat
+    public enum ItemPosition
     {
-        Png,
-        Jpeg,
-        Gif
+        Left,
+        Right,
+        Top,
+        Bottom
     }
 }

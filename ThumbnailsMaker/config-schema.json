@@ -95,7 +95,8 @@
 							"minimum": 0
 						},
 						"horizontalAlignment": {"$ref": "#/definitions/horizontalAlignment"}
-					}
+					},
+					"additionalProperties": false
 				}
 			]
 		},
@@ -105,11 +106,11 @@
 				"enabled": { "$ref": "#/definitions/enabled" },
 				"shiftRight": {
 					"type": "integer",
-					"default": 0
+					"default": 3
 				},
 				"shiftDown": {
 					"type": "integer",
-					"default": 0
+					"default": 3
 				},
 				"sizeShift": {
 					"type": "integer",
@@ -118,6 +119,28 @@
 				"color": { "$ref": "#/definitions/color" }
 			},
 			"additionalProperties": false
+		},
+		"size": {
+			"type": "object",
+			"properties": {
+				"width": {
+					"type": "integer",
+					"exclusiveMinimum": 0,
+					"default": 100
+				},
+				"height": {
+					"type": "integer",
+					"exclusiveMinimum": 0,
+					"default": 10
+				}
+			},
+			"additionalProperties": false
+		},
+		"itemPosition": {
+			"enum": [ "left", "right", "top", "bottom" ],
+			"type": "string",
+			"default": "bottom",
+			"description": "Item position."
 		},
 		"text": {
 			"type": "object",
@@ -136,10 +159,28 @@
 				"font": { "$ref": "#/definitions/font" },
 				"shadowFont": { "$ref": "#/definitions/font" },
 				"position": { "$ref": "#/definitions/coordinates"},
-				"shadow": { "$ref": "#/definitions/shadow" }
+				"shadow": { "$ref": "#/definitions/shadow" },
+				"line": {
+					"type": "object",
+					"properties": {
+						"enabled": { "$ref": "#/definitions/enabled" },
+						"size": { "$ref": "#/definitions/size" },
+						"position": {"$ref": "#/definitions/itemPosition"},
+						"color": { "$ref": "#/definitions/color" },
+						"type": { "$ref": "#/definitions/lineType" },
+						"shadow": { "$ref": "#/definitions/shadow" }
+					},
+					"additionalProperties": false
+				}
 			},
 			"additionalProperties": false,
 			"required": ["position", "message", "font"]
+		},
+		"lineType": {
+			"enum": [ "single", "double" ],
+			"type": "string",
+			"default": "single",
+			"description": "Line type."
 		},
 		"line": {
 			"type": "object",

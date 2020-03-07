@@ -11,7 +11,6 @@ namespace ThumbnailsMaker
         public int Height { get; set; } = 80;
 
         [JsonPropertyName("position")]
-        [JsonConverter(typeof(JsonStringEnumConverter))]
         public BarPosition Position { get; set; } = BarPosition.Top;
 
         [JsonPropertyName("text")]
@@ -24,7 +23,6 @@ namespace ThumbnailsMaker
         public string DateTimeFormat { get; set; } = string.Empty;
 
         [JsonPropertyName("textAlignment")]
-        [JsonConverter(typeof(JsonStringEnumConverter))]
         public TextHorizontalAlignment TextHorizontalAlignment { get; set; } = TextHorizontalAlignment.Center;
         
         [JsonPropertyName("textPaddingLeftRight")]

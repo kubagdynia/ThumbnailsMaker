@@ -8,10 +8,10 @@ namespace ThumbnailsMaker
         public bool Enabled { get; set; }
 
         [JsonPropertyName("shiftRight")]
-        public int ShiftRight { get; set; } = 0;
+        public int ShiftRight { get; set; } = 3;
         
         [JsonPropertyName("shiftDown")]
-        public int ShiftDown { get; set; } = 0;
+        public int ShiftDown { get; set; } = 3;
         
         [JsonPropertyName("sizeShift")]
         public int SizeShift { get; set; } = 0;
