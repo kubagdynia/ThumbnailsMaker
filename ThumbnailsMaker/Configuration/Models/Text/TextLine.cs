@@ -21,5 +21,8 @@ namespace ThumbnailsMaker
 
         [JsonPropertyName("type")]
         public LineType Type { get; set; } = LineType.Single;
+        
+        [JsonPropertyName("horizontalAlignment")]
+        public TextHorizontalAlignment HorizontalAlignment { get; set; } = TextHorizontalAlignment.Center;
     }
 }

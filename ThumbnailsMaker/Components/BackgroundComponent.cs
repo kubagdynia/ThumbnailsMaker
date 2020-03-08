@@ -1,3 +1,4 @@
+using System;
 using Autofac.Features.Indexed;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp;
@@ -30,8 +31,9 @@ namespace ThumbnailsMaker.Components
                 
                 TextGraphicsOptions textGraphicsOptions = CreateTextGraphicsOptions(text);
 
+                CalculateTextPosition(text);
+
                 AddShadow(image, text, textGraphicsOptions, fontFamily);
-                
                 AddText(image, text, textGraphicsOptions, fontFamily);
                 
                 AddTextLineShadow(image, text, textGraphicsOptions, fontFamily);
@@ -62,6 +64,21 @@ namespace ThumbnailsMaker.Components
             else if (image.Width != _config.ImageWidth || image.Height != _config.ImageHeight)
             {
                 image.Mutate(x => x.Resize(new Size(_config.ImageWidth, _config.ImageHeight)));
+            }
+        }
+        
+        private void CalculateTextPosition(Text text)
+        {
+            if (text.Position.UseHorizontalAlignment)
+            {
+                text.Position.X = text.Position.TextHorizontalAlignment switch
+                {
+                    TextHorizontalAlignment.Left => 0,
+                    TextHorizontalAlignment.Right => _config.ImageWidth - (int) text.WrapTextWidth,
+                    TextHorizontalAlignment.Center => _config.ImageWidth / 2 - (int) text.WrapTextWidth / 2,
+                    _ => throw new ArgumentException("Invalid type of horizontal alignment",
+                        nameof(text.Position.TextHorizontalAlignment))
+                };
             }
         }
 
@@ -142,7 +159,17 @@ namespace ThumbnailsMaker.Components
                     i.Fill(text.TextLine.Shadow.Color.ToColor(), rectangle.Add(0, text.TextLine.Size.Height + 10)));
             }
             
-            int GetTextCenter() => text.Position.X + (int) textGraphicsOptions.WrapTextWidth / 2;
+            int GetTextCenter()
+            {
+                return text.TextLine.HorizontalAlignment switch
+                {
+                    TextHorizontalAlignment.Left => text.Position.X + text.TextLine.Size.Width / 2,
+                    TextHorizontalAlignment.Right => text.Position.X + (int) textGraphicsOptions.WrapTextWidth - text.TextLine.Size.Width / 2,
+                    TextHorizontalAlignment.Center => text.Position.X + (int) textGraphicsOptions.WrapTextWidth / 2,
+                    _ => throw new ArgumentException("Invalid type of horizontal alignment",
+                        nameof(text.TextLine.HorizontalAlignment))
+                };
+            }
         }
         
         private void AddTextLine(Image image, Text text, TextGraphicsOptions textGraphicsOptions, FontFamily fontFamily)
@@ -181,7 +208,17 @@ namespace ThumbnailsMaker.Components
                     i.Fill(text.TextLine.Color.ToColor(), rectangle.Add(0, text.TextLine.Size.Height + 10)));
             }
 
-            int GetTextCenter() => text.Position.X + (int) textGraphicsOptions.WrapTextWidth / 2;
+            int GetTextCenter()
+            {
+                return text.TextLine.HorizontalAlignment switch
+                {
+                    TextHorizontalAlignment.Left => text.Position.X + text.TextLine.Size.Width / 2,
+                    TextHorizontalAlignment.Right => text.Position.X + (int) textGraphicsOptions.WrapTextWidth - text.TextLine.Size.Width / 2,
+                    TextHorizontalAlignment.Center => text.Position.X + (int) textGraphicsOptions.WrapTextWidth / 2,
+                    _ => throw new ArgumentException("Invalid type of horizontal alignment",
+                        nameof(text.TextLine.HorizontalAlignment))
+                };
+            }
         }
 
         private SizeF GetTextSize(Text text, TextGraphicsOptions textGraphicsOptions, Font font)

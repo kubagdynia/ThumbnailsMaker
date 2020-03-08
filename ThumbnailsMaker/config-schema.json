@@ -94,7 +94,11 @@
 							"type": "integer",
 							"minimum": 0
 						},
-						"horizontalAlignment": {"$ref": "#/definitions/horizontalAlignment"}
+						"horizontalAlignment": {"$ref": "#/definitions/horizontalAlignment"},
+						"useHorizontalAlignment": {
+							"type": "boolean",
+							"default": true
+						}
 					},
 					"additionalProperties": false
 				}
@@ -158,7 +162,7 @@
 				},
 				"font": { "$ref": "#/definitions/font" },
 				"shadowFont": { "$ref": "#/definitions/font" },
-				"position": { "$ref": "#/definitions/coordinates"},
+				"position": { "$ref": "#/definitions/position"},
 				"shadow": { "$ref": "#/definitions/shadow" },
 				"line": {
 					"type": "object",
@@ -168,7 +172,8 @@
 						"position": {"$ref": "#/definitions/itemPosition"},
 						"color": { "$ref": "#/definitions/color" },
 						"type": { "$ref": "#/definitions/lineType" },
-						"shadow": { "$ref": "#/definitions/shadow" }
+						"shadow": { "$ref": "#/definitions/shadow" },
+						"horizontalAlignment": { "$ref":  "#/definitions/horizontalAlignment" }
 					},
 					"additionalProperties": false
 				}
