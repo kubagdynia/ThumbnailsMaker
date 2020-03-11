@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Jpeg;
@@ -23,9 +22,7 @@ namespace ThumbnailsMaker.Components
             var outputDirectory = Directory.CreateDirectory(_config.Config.ImageOutput.Directory);
             
             using var thumbnail =
-                Image.Load(_config.Config?.Background?.ImagePath ??
-                           throw new ArgumentException(
-                               $"background file path '{_config.Config?.Background?.ImagePath}' not found"));
+                Image.Load(_config.Config.Background.ImagePath);
             
             _backgroundComponent.DrawBackground(thumbnail);
             
@@ -35,7 +32,7 @@ namespace ThumbnailsMaker.Components
             _barComponent.DrawBar(thumbnail, BarPosition.Bottom);
             
             var output =
-                Path.ChangeExtension(Path.Combine(outputDirectory.FullName, Path.GetFileName(_config.Config?.Background?.ImagePath)),
+                Path.ChangeExtension(Path.Combine(outputDirectory.FullName, Path.GetFileName(_config.Config.Background.ImagePath)),
                     _config.Config.ImageOutput.ImageFormat.ToFileExtension());
             
             if (_config.Config.ImageOutput.ImageFormat == ImageFormat.Jpeg)

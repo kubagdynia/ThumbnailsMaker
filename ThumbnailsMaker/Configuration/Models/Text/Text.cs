@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace ThumbnailsMaker
 {
+    [Serializable]
     public class Text
     {
         [JsonPropertyName("enabled")]
@@ -30,6 +32,11 @@ namespace ThumbnailsMaker
         public TextPosition Position { get; set; } = TextPosition.Zero;
         
         [JsonPropertyName("line")]
-        public TextLine TextLine { get; set; } = new TextLine(); 
+        public TextLine TextLine { get; set; } = new TextLine();
+        
+        [JsonPropertyName("childText")]
+        public List<Text> ChildTexts { get; set; } = new List<Text>();
+
+        public static Text Default => new Text();
     }
 }

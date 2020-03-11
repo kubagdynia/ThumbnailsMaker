@@ -57,6 +57,6 @@ namespace ThumbnailsMaker
     internal class Options
     {
         [Option('c', "config", Required = false, Default = "config.json" , HelpText = "Configuration file name")]
-        public string Config { get; set; }
+        public string Config { get; set; } = String.Empty;
     }
 }

@@ -68,7 +68,24 @@
 						],
 						"sizeShift": 0
 					}
-				}
+				},
+				"childTexts": [
+					{
+						"enabled": true,
+						"message": "another small text",
+						"font": {
+							"size": 80
+						},
+						"line": {
+							"enabled": true,
+							"size": {
+								"height": 5,
+								"width": 600
+							},
+							"type": "double"
+						}
+					}
+				]
 			},
 			{
 				"enabled": true,

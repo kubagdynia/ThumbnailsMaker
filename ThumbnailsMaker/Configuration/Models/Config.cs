@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace ThumbnailsMaker
 {
+    [Serializable]
     public class Config
     {
         [JsonPropertyName("output")]
@@ -18,9 +20,9 @@ namespace ThumbnailsMaker
         public int ImageHeight { get; set; }
 
         [JsonPropertyName("bars")]
-        public List<Bar> Bars { get; set; }
+        public List<Bar> Bars { get; set; } = new List<Bar>();
         
         [JsonPropertyName("background")]
-        public Background Background { get; set; }
+        public Background Background { get; set; } = new Background();
     }
 }

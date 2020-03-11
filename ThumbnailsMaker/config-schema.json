@@ -45,8 +45,7 @@
 				},
 				"color": { "$ref": "#/definitions/color" }
 			},
-			"additionalProperties": false,
-			"required": [ "path" ]
+			"additionalProperties": false
 		},
 		"horizontalAlignment": {
 			"enum": [ "left", "right", "center" ],
@@ -176,10 +175,17 @@
 						"horizontalAlignment": { "$ref":  "#/definitions/horizontalAlignment" }
 					},
 					"additionalProperties": false
+				},
+				"childTexts": {
+					"type":"array",
+					"minItems": 1,
+					"items": {
+						"$ref": "#/definitions/text"	
+					}
 				}
 			},
 			"additionalProperties": false,
-			"required": ["position", "message", "font"]
+			"required": ["message"]
 		},
 		"lineType": {
 			"enum": [ "single", "double" ],

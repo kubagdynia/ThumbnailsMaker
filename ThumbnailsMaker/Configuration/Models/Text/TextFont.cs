@@ -1,7 +1,9 @@
+using System;
 using System.Text.Json.Serialization;
 
 namespace ThumbnailsMaker
 {
+    [Serializable]
     public class TextFont
     {
         [JsonPropertyName("path")]
@@ -15,7 +17,7 @@ namespace ThumbnailsMaker
         
         [JsonPropertyName("color")]
         public int[] Color { get; set; } = {255, 255, 255, 255};
-        
+
         public static TextFont Default => new TextFont();
     }
 }

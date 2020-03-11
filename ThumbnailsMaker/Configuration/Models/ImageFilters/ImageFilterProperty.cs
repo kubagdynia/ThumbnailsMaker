@@ -1,7 +1,9 @@
+using System;
 using System.Text.Json.Serialization;
 
 namespace ThumbnailsMaker
 {
+    [Serializable]
     public abstract class ImageFilterProperty : IImageFilterProperty
     {
         [JsonPropertyName("enabled")]
