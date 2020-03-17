@@ -17,30 +17,32 @@ namespace ThumbnailsMaker
                 IgnoreNullValues = false
             });
 
-            CompleteChildTextsData(Config.Background.Texts);
+            CompleteChildTextsWithParentsDetails(Config.Background.Texts);
         }
 
-        private void CompleteChildTextsData(List<Text> texts)
+        private void CompleteChildTextsWithParentsDetails(List<Text> texts)
         {
             if (texts is null || !texts.Any()) return;
             
             foreach (var text in texts)
             {
-                CompleteChildTextsData(text.ChildTexts, text);
+                CompleteChildTextsData(text.NullableChildTexts, text);
             }
         }
 
-        private void CompleteChildTextsData(List<Text> texts, Text parentText)
+        private void CompleteChildTextsData(List<NullableText>? childTexts, Text parentText)
         {
-            if (texts is null || !texts.Any()) return;
-            
-            foreach (var text in texts)
+            if (childTexts is null || !childTexts.Any() || parentText is null) return;
+
+            if (parentText.ChildTexts == null)
             {
-                if (parentText is {})
-                {
-                    Text newText = parentText.DeepClone();
-                    CompleteChildTextsData(text.ChildTexts, text);
-                }
+                parentText.ChildTexts = new List<Text>();
+            }
+            
+            foreach (var childText in childTexts)
+            {
+                var newChildText = parentText.DeepClone();
+                childText.CloneNonNullValues(newChildText);
             }
         }
     }

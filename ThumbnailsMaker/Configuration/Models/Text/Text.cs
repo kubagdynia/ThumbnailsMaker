@@ -34,8 +34,9 @@ namespace ThumbnailsMaker
         [JsonPropertyName("line")]
         public TextLine TextLine { get; set; } = new TextLine();
         
-        [JsonPropertyName("childText")]
-        public List<Text> ChildTexts { get; set; } = new List<Text>();
+        [JsonPropertyName("childTexts")]
+        public List<NullableText>? NullableChildTexts { get; set; }
+        public List<Text>? ChildTexts { get; set; }
 
         public static Text Default => new Text();
     }
