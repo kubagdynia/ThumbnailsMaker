@@ -73,8 +73,13 @@
 					{
 						"enabled": true,
 						"message": "another small text",
+						"horizontalAlignment": "right",
 						"font": {
 							"size": 80
+						},
+						"position": {
+							"x": 0,
+							"y": 200
 						},
 						"line": {
 							"enabled": true,
@@ -82,69 +87,11 @@
 								"height": 5,
 								"width": 600
 							},
+							"horizontalAlignment": "right",
 							"type": "double"
 						}
 					}
 				]
-			},
-			{
-				"enabled": true,
-				"message": "and small text",
-				"horizontalAlignment": "right",
-				"antialias": true,
-				"wrapTextWidth": 900,
-				"font": {
-					"path": "./fonts/BebasNeue-Regular.ttf",
-					"size": 80,
-					"positionCorrection": 0,
-					"color": [
-						255,
-						255,
-						255
-					]
-				},
-				"position": {
-					"x": 200,
-					"y": 400,
-					"useHorizontalAlignment": true
-				},
-				"shadow": {
-					"enabled": true,
-					"shiftRight": 3,
-					"shiftDown": 3,
-					"color": [
-						147,
-						112,
-						219
-					],
-					"sizeShift": 0
-				},
-				"line": {
-					"enabled": true,
-					"size": {
-						"height": 5,
-						"width": 600
-					},
-					"position": "bottom",
-					"horizontalAlignment": "right",
-					"color": [
-						255,
-						255,
-						255
-					],
-					"type": "double",
-					"shadow": {
-						"enabled": true,
-						"shiftRight": 3,
-						"shiftDown": 3,
-						"color": [
-							147,
-							112,
-							219
-						],
-						"sizeShift": 0
-					}
-				}
 			}
 		],
 		"lines": [

@@ -99,6 +99,7 @@
 							"default": true
 						}
 					},
+					"required": ["horizontalAlignment"],
 					"additionalProperties": false
 				}
 			]

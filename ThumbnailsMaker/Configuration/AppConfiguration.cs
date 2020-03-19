@@ -43,6 +43,7 @@ namespace ThumbnailsMaker
             {
                 var newChildText = parentText.DeepClone();
                 childText.CloneNonNullValues(newChildText);
+                parentText.ChildTexts.Add(newChildText);
             }
         }
     }

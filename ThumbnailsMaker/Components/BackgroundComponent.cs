@@ -27,22 +27,36 @@ namespace ThumbnailsMaker.Components
             
             foreach (Text text in _config.Background.Texts)
             {
-                FontFamily fontFamily = new FontCollection().Install(text.TextFont.Path);
-                
-                TextGraphicsOptions textGraphicsOptions = CreateTextGraphicsOptions(text);
-
-                CalculateTextPosition(text);
-
-                AddShadow(image, text, textGraphicsOptions, fontFamily);
-                AddText(image, text, textGraphicsOptions, fontFamily);
-                
-                AddTextLineShadow(image, text, textGraphicsOptions, fontFamily);
-                AddTextLine(image, text, textGraphicsOptions, fontFamily);
+                DrawText(image, text);
             }
 
             foreach (Line line in _config.Background.Lines)
             {
                 AddLine(image, line);
+            }
+        }
+
+        private void DrawText(Image image, Text text, Text? parentText = null)
+        {
+            if (!text.Enabled) return;
+            
+            FontFamily fontFamily = new FontCollection().Install(text.TextFont.Path);
+
+            TextGraphicsOptions textGraphicsOptions = CreateTextGraphicsOptions(text);
+
+            CalculateTextPosition(text, parentText);
+
+            AddShadow(image, text, textGraphicsOptions, fontFamily);
+            AddText(image, text, textGraphicsOptions, fontFamily);
+
+            AddTextLineShadow(image, text, textGraphicsOptions, fontFamily);
+            AddTextLine(image, text, textGraphicsOptions, fontFamily);
+
+            if (text.ChildTexts is null) return;
+            
+            foreach (var childText in text.ChildTexts)
+            {
+                DrawText(image, childText, text);
             }
         }
 
@@ -67,8 +81,14 @@ namespace ThumbnailsMaker.Components
             }
         }
         
-        private void CalculateTextPosition(Text text)
+        private void CalculateTextPosition(Text text, Text? parentText = null)
         {
+            if (parentText is {})
+            {
+                text.Position.X += parentText.Position.X;
+                text.Position.Y += parentText.Position.Y;
+            }
+            
             if (text.Position.UseHorizontalAlignment)
             {
                 text.Position.X = text.Position.TextHorizontalAlignment switch
