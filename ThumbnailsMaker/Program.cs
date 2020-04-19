@@ -50,6 +50,11 @@ namespace ThumbnailsMaker
                     builder.RegisterType<AppConfiguration>()
                         .WithParameter(new TypedParameter(typeof(string), options.Config))
                         .SingleInstance();
+                })
+                .WithNotParsed(errors =>
+                {
+                    // in case of parameter parsing errors or using help option close the application
+                    Environment.Exit(0);
                 });
         }
     }
